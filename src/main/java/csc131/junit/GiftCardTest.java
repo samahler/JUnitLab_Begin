@@ -1,8 +1,9 @@
 package csc131.junit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
+
 
 public class GiftCardTest
 {
@@ -88,5 +89,24 @@ public class GiftCardTest
 		assertEquals("deduct(101.00)", remainingBalance, card.deduct(101.00));
 	}
 	
+	
+	@Test
+	public void constructor_Incorrectbalance_Low()
+	{
+		assertThrows(IllegalArgumentException.class, () -> {new GiftCard(1,-100.00);});
+	}
+	
+	
+	@Test
+	public void constructor_IncorrectID_Low()
+	{
+		assertThrows(IllegalArgumentException.class, () -> {new GiftCard(-1,100.00);});
+	}
+	
+	@Test
+	public void constructor_IncorrectID_High()
+	{
+		assertThrows(IllegalArgumentException.class, () -> {new GiftCard(10000,100.00);});
+	}
 	
 }
